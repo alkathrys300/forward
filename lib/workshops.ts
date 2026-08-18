@@ -22,6 +22,9 @@ export type WorkshopItem = {
   description?: string;
   location?: string;
   agenda?: { title: string; description: string }[];
+  /** Renders as a large full-width banner above the regular grid,
+   * for the one or two most important active items. */
+  featured?: boolean;
   /** Google Form (or similar) link. When set, the registration button
    * opens it inside the site's own modal via an iframe — the visitor
    * never leaves the page, but responses are still collected on your
@@ -121,6 +124,7 @@ export const workshopItems: WorkshopItem[] = [
     tone: "bg-sun text-navy",
     imageUrl: "/images/ai-workshop-announcement.jpeg",
     slug: "ai-from-lecture-to-job",
+    featured: true,
     location: "أونلاين عبر Zoom",
     presenter: "م. محمد المحفدي",
     presenterTitle:
