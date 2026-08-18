@@ -67,6 +67,35 @@ export const workshopItems: WorkshopItem[] = [
   },
   {
     kind: "ورشة",
+    title: "استضافات التميز 01: تجربتي في الجامعة",
+    host: "م. فيصل جواس",
+    date: "مسجلة",
+    price: "مجاني",
+    tone: "bg-teal text-cream-soft",
+    youtubeUrl: "https://youtu.be/wiCH0qYPD9I?si=wRQqjnSAFLlo4-kd",
+  },
+  {
+    kind: "ورشة",
+    title:
+      "استضافات التميز 02: مهارات المستقبل — تطوير الذات من الحياة الجامعية إلى عالم الأعمال",
+    host: "أ. بلال عبد الكريم",
+    date: "مسجلة",
+    price: "مجاني",
+    tone: "bg-teal text-cream-soft",
+    youtubeUrl: "https://youtu.be/KfT3nAL7HrE?si=tP_BCv3U1yigUh7u",
+  },
+  {
+    kind: "ورشة",
+    title:
+      "استضافات التميز 03: المهارات الإدارية الأساسية — ما يحتاجه الطالب الجامعي",
+    host: "أ. محمد الاغبري",
+    date: "مسجلة",
+    price: "مجاني",
+    tone: "bg-teal text-cream-soft",
+    youtubeUrl: "https://youtu.be/CSJRFHHN364?si=1O2ExtVNpcXB_lG9",
+  },
+  {
+    kind: "ورشة",
     title: "الطالب الذكي: الذكاء الاصطناعي رفيقك من المحاضرة إلى الوظيفة",
     host: "فريق فُورْوَرْد",
     date: "السبت، 29 أغسطس 2026 — 4:00 مساءً (توقيت اليمن) · 9:00 مساءً (توقيت ماليزيا)",
