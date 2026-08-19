@@ -135,6 +135,7 @@ export const workshopItems: WorkshopItem[] = [
     presenter: "م. محمد المحفدي",
     presenterTitle:
       "استشاري تحول ذكي، بخبرة عملية في مجالات الذكاء الاصطناعي، الأتمتة، وتطوير الأعمال",
+    presenterPhoto: "/images/presenter-mohammed-almahfadi.jpg",
     presenterLinkedIn: "https://www.linkedin.com/in/mohalmah",
     presenterHighlights: [
       {
