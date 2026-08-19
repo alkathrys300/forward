@@ -17,8 +17,14 @@ export type WorkshopItem = {
   slug?: string;
   presenter?: string;
   presenterTitle?: string;
+  presenterPhoto?: string;
   presenterBio?: string[];
   presenterLinkedIn?: string;
+  presenterHighlights?: {
+    icon: "vision" | "experience" | "skills" | "education";
+    title: string;
+    description: string;
+  }[];
   description?: string;
   location?: string;
   agenda?: { title: string; description: string }[];
@@ -130,6 +136,32 @@ export const workshopItems: WorkshopItem[] = [
     presenterTitle:
       "استشاري تحول ذكي، بخبرة عملية في مجالات الذكاء الاصطناعي، الأتمتة، وتطوير الأعمال",
     presenterLinkedIn: "https://www.linkedin.com/in/mohalmah",
+    presenterHighlights: [
+      {
+        icon: "vision",
+        title: "رؤية المقدّم",
+        description:
+          "استشاري تحول ذكي، بخبرة عملية في مجالات الذكاء الاصطناعي، الأتمتة، وتطوير الأعمال.",
+      },
+      {
+        icon: "experience",
+        title: "الخبرة والمناصب",
+        description:
+          "مدير مشارك للتحول المؤسسي في Accenture، يقود فريقًا للتحول ويدير مبادرات تطوير وتحسين عالمية.",
+      },
+      {
+        icon: "skills",
+        title: "المهارات التقنية والعملية",
+        description:
+          "الذكاء الاصطناعي التوليدي وAgentic AI، تحليل البيانات بـPython وSQL، ومنهجيات Lean Six Sigma.",
+      },
+      {
+        icon: "education",
+        title: "التعليم",
+        description:
+          "ماجستير هندسة النظم من Arizona State University، وبكالوريوس الهندسة الكيميائية من Universiti Malaysia Pahang.",
+      },
+    ],
     presenterBio: [
       "م. محمد المحفدي، استشاري تحول ذكي ومتخصص في تطبيقات الذكاء الاصطناعي، والأتمتة، وتحسين العمليات، والتميز التشغيلي. يعمل حاليًا في Accenture بمنصب مدير مشارك للتحول المؤسسي (Business Transformation Associate Manager)، حيث يقود فريقًا للتحول ويدير مبادرات تطوير وتحسين تغطي مواقع عمل عالمية ومسارات تشغيلية متعددة.",
       "يمتلك محمد خبرة مهنية تمتد لأكثر من سبع سنوات في قيادة الفرق، وتحليل المشكلات، وإعادة هندسة العمليات، وتحويل التحديات التشغيلية إلى حلول ومبادرات عملية قابلة للتطبيق والقياس. وقد قاد تصميم وتطوير وإطلاق مجموعة من الحلول المعتمدة على الذكاء الاصطناعي التوليدي والـAgentic AI، إلى جانب مشاريع في تحليل البيانات، وأتمتة سير العمل، وتحسين الجودة والكفاءة وتجربة المستخدم.",
