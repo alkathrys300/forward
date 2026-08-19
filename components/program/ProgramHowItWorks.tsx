@@ -9,7 +9,7 @@ export default function ProgramHowItWorks({
   program: ProgramDetail;
 }) {
   return (
-    <section className="relative py-20 sm:py-24 bg-navy overflow-hidden">
+    <section className="relative pt-20 sm:pt-24 pb-10 sm:pb-14 bg-navy overflow-hidden">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute bottom-0 left-1/4 w-80 h-80 rounded-full bg-teal/10 blur-3xl"

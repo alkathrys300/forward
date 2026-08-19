@@ -10,7 +10,7 @@ const beliefs = [
 
 export default function BeliefsManifesto() {
   return (
-    <section className="relative py-20 sm:py-28 bg-navy overflow-hidden">
+    <section className="relative pt-20 sm:pt-28 pb-10 sm:pb-14 bg-navy overflow-hidden">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute bottom-0 left-1/4 w-[26rem] h-[26rem] rounded-full bg-sun/10 blur-3xl"

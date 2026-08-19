@@ -9,7 +9,7 @@ export default function AboutFinalCTA() {
   return (
     <section className="pb-20 sm:pb-28">
       <Container>
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-navy-deep via-navy to-teal-deep px-8 py-20 sm:py-28 text-center">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-navy-deep via-navy to-teal-deep px-8 pt-14 sm:pt-20 pb-20 sm:pb-28 text-center">
           <div
             aria-hidden="true"
             className="absolute inset-x-0 bottom-0 h-32 sm:h-44"

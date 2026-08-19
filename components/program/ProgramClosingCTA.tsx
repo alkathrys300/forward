@@ -13,7 +13,7 @@ export default function ProgramClosingCTA({
   return (
     <section className="pb-20 sm:pb-28">
       <Container>
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-navy-deep via-navy to-teal-deep px-8 py-16 sm:py-24 text-center">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-navy-deep via-navy to-teal-deep px-8 pt-10 sm:pt-16 pb-16 sm:pb-24 text-center">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute left-1/2 -translate-x-1/2 -bottom-20 w-72 h-72 rounded-full bg-sun/10 blur-3xl"
