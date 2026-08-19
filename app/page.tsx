@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import FeaturedAnnouncement from "@/components/FeaturedAnnouncement";
 import WhereAreYouNow from "@/components/WhereAreYouNow";
 import AboutForward from "@/components/AboutForward";
 import ProgramsPreview from "@/components/ProgramsPreview";
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <FeaturedAnnouncement />
         <WhereAreYouNow />
         <AboutForward />
         <ProgramsPreview />
