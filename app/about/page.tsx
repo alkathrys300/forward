@@ -5,7 +5,6 @@ import AboutHero from "@/components/about/AboutHero";
 import AboutIntro from "@/components/about/AboutIntro";
 import WhyForward from "@/components/about/WhyForward";
 import ForwardJourney from "@/components/about/ForwardJourney";
-import FounderSection from "@/components/about/FounderSection";
 import BeliefsManifesto from "@/components/about/BeliefsManifesto";
 import AboutFinalCTA from "@/components/about/AboutFinalCTA";
 
@@ -32,7 +31,6 @@ export default function AboutPage() {
         <AboutIntro />
         <WhyForward />
         <ForwardJourney />
-        <FounderSection />
         <BeliefsManifesto />
         <AboutFinalCTA />
       </main>
