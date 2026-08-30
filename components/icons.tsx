@@ -184,6 +184,17 @@ export function TagIcon({ className = "w-5 h-5" }: IconProps) {
   );
 }
 
+export function ShareIcon({ className = "w-5 h-5" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base} stroke="currentColor" aria-hidden="true">
+      <circle cx="18" cy="5.5" r="2.5" />
+      <circle cx="6" cy="12" r="2.5" />
+      <circle cx="18" cy="18.5" r="2.5" />
+      <path d="M8.2 10.7l7.6-4.4M8.2 13.3l7.6 4.4" />
+    </svg>
+  );
+}
+
 export function LinkedInIcon({ className = "w-5 h-5" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">

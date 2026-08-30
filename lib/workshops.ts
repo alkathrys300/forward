@@ -28,6 +28,10 @@ export type WorkshopItem = {
   description?: string;
   location?: string;
   agenda?: { title: string; description: string }[];
+  /** Only meaningful for items that take real registrations (i.e. have a
+   * formUrl). Omit for recorded talks — "availability" doesn't apply to
+   * a video that already exists. */
+  registrationStatus?: "available" | "full" | "closed";
   /** Renders as a large full-width banner above the regular grid,
    * for the one or two most important active items. */
   featured?: boolean;
@@ -64,6 +68,7 @@ export const workshopItems: WorkshopItem[] = [
     price: "مجاني",
     tone: "bg-teal text-cream-soft",
     youtubeUrl: "https://youtu.be/U_a5qcp0mro?si=Os8UZ9ohi071K75j",
+    slug: "yemen-debates",
   },
   {
     kind: "ورشة",
@@ -73,6 +78,7 @@ export const workshopItems: WorkshopItem[] = [
     price: "مجاني",
     tone: "bg-teal text-cream-soft",
     youtubeUrl: "https://youtu.be/ZPi5cawU4yQ?si=V6bnZmUWiqNaCByI",
+    slug: "how-to-excel-in-university",
   },
   {
     kind: "ورشة",
@@ -82,6 +88,7 @@ export const workshopItems: WorkshopItem[] = [
     price: "مجاني",
     tone: "bg-teal text-cream-soft",
     youtubeUrl: "https://youtu.be/wiCH0qYPD9I?si=wRQqjnSAFLlo4-kd",
+    slug: "excellence-talks-01-faisal-jawas",
   },
   {
     kind: "ورشة",
@@ -92,6 +99,7 @@ export const workshopItems: WorkshopItem[] = [
     price: "مجاني",
     tone: "bg-teal text-cream-soft",
     youtubeUrl: "https://youtu.be/KfT3nAL7HrE?si=tP_BCv3U1yigUh7u",
+    slug: "excellence-talks-02-bilal-abdulkarim",
   },
   {
     kind: "ورشة",
@@ -102,6 +110,7 @@ export const workshopItems: WorkshopItem[] = [
     price: "مجاني",
     tone: "bg-teal text-cream-soft",
     youtubeUrl: "https://youtu.be/CSJRFHHN364?si=1O2ExtVNpcXB_lG9",
+    slug: "excellence-talks-03-mohammed-alaghbari",
   },
   {
     kind: "ورشة",
@@ -111,6 +120,7 @@ export const workshopItems: WorkshopItem[] = [
     price: "مجاني",
     tone: "bg-teal text-cream-soft",
     youtubeUrl: "https://youtu.be/7CYQEa_meTE?si=HwxmqYGqTdoChiV7",
+    slug: "ai-major-guide-course",
   },
   {
     kind: "ورشة",
@@ -120,6 +130,7 @@ export const workshopItems: WorkshopItem[] = [
     price: "مجاني",
     tone: "bg-teal text-cream-soft",
     youtubeUrl: "https://youtu.be/sTCTPzigOwo?si=Sj1t5MfZJ27bCIwb",
+    slug: "excellence-quotes-ai-faisal-jawas",
   },
   {
     kind: "ورشة",
@@ -131,6 +142,7 @@ export const workshopItems: WorkshopItem[] = [
     imageUrl: "/images/ai-workshop-announcement.jpeg",
     slug: "ai-from-lecture-to-job",
     featured: true,
+    registrationStatus: "available",
     location: "أونلاين عبر Zoom",
     presenter: "م. محمد المحفدي",
     presenterTitle:

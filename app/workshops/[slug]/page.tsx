@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WorkshopDetailHero from "@/components/workshop/WorkshopDetailHero";
+import WorkshopVideoEmbed from "@/components/workshop/WorkshopVideoEmbed";
 import WorkshopDetailBody from "@/components/workshop/WorkshopDetailBody";
 import WorkshopAgenda from "@/components/workshop/WorkshopAgenda";
 import WorkshopPresenter from "@/components/workshop/WorkshopPresenter";
@@ -43,6 +44,7 @@ export default async function WorkshopDetailPage({
       <Navbar />
       <main>
         <WorkshopDetailHero item={item} />
+        <WorkshopVideoEmbed item={item} />
         <WorkshopDetailBody item={item} />
         <WorkshopAgenda item={item} />
         <WorkshopPresenter item={item} />

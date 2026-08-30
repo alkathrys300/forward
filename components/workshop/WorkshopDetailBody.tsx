@@ -3,6 +3,8 @@ import Reveal from "@/components/Reveal";
 import type { WorkshopItem } from "@/lib/workshops";
 
 export default function WorkshopDetailBody({ item }: { item: WorkshopItem }) {
+  if (!item.description && item.youtubeUrl) return null;
+
   return (
     <section className="pb-16 sm:pb-20">
       <Container>
