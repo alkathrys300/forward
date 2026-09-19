@@ -1,0 +1,12 @@
+# The blog is a static export (see next.config.mjs) with no server, so
+# individual posts can't be pre-rendered per-slug at build time — new
+# posts are added through blog-cms/public/admin without a rebuild, so
+# their slugs don't exist yet when this site is built. These rules keep
+# the pretty /blog/<slug>/ URL in the address bar while actually serving
+# the one static shell page that resolves the slug client-side. See
+# components/blog/BlogPostClient.tsx and BLOG_SETUP.md for the full
+# explanation. Rewrites (status 200) leave the URL bar untouched; they
+# only run for paths with no matching static file, so /blog/ itself
+# (a real file) is served directly and never hits these rules.
+/blog/:slug/  /blog/post/  200
+/blog/:slug   /blog/post/  200

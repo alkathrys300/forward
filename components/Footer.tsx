@@ -18,6 +18,7 @@ const columns = [
       { label: "انضم إلى المجتمع", href: COMMUNITY_URL, external: true },
       { label: "الفعاليات", href: "#" },
       { label: "الورش", href: "/#workshops" },
+      { label: "المدونة", href: "/blog/" },
     ],
   },
   {

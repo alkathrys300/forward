@@ -12,6 +12,7 @@ const navLinks = [
   { label: "البرامج", href: "/#programs" },
   { label: "عن فُورْوَرْد", href: "/about/" },
   { label: "ورش العمل", href: "/#workshops" },
+  { label: "المدونة", href: "/blog/" },
   { label: "المجتمع", href: "/#community" },
   { label: "تعاون معنا", href: "/#collaborate" },
 ];

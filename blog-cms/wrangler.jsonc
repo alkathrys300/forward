@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "forward-blog-cms",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-19",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "forward_blog",
+      "database_id": "9f25ef4d-c1e0-43ed-9abc-87c8ea130000"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "IMAGES",
+      "bucket_name": "forward-blog-images"
+    }
+  ]
+}

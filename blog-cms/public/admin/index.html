@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>لوحة تحكم المدونة — فُورْوَرْد</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #F7F2E7;
+    --cream-soft: #FBF8F0;
+    --cream-deep: #EFE7D4;
+    --navy: #14282F;
+    --navy-deep: #0D1C21;
+    --navy-light: #22414A;
+    --teal: #1F6B67;
+    --teal-deep: #154B48;
+    --teal-mint: #DEEEE7;
+    --sun: #EFA45C;
+    --ink: #182A2E;
+    --ink-soft: #4C6066;
+    --ink-faint: #8397A0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "IBM Plex Sans Arabic", Tahoma, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 24px 20px 80px; }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 20px; background: var(--navy-deep); color: var(--cream-soft);
+  }
+  .topbar h1 { font-size: 1.05rem; font-weight: 700; margin: 0; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: none; border-radius: 999px; padding: 10px 20px;
+    font-family: inherit; font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; transition: opacity .2s;
+  }
+  .btn:hover { opacity: .88; }
+  .btn-primary { background: var(--teal); color: var(--cream-soft); }
+  .btn-ghost { background: rgba(247,242,231,0.1); color: var(--cream-soft); }
+  .btn-light { background: var(--cream-soft); color: var(--navy); border: 1px solid rgba(20,40,47,0.12); }
+  .btn-danger { background: transparent; color: #b2452f; border: 1px solid rgba(178,69,47,0.3); }
+  .btn-sm { padding: 7px 14px; font-size: 0.82rem; }
+  .btn[disabled] { opacity: .55; cursor: not-allowed; }
+
+  .login-screen {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;
+  }
+  .login-card {
+    width: 100%; max-width: 380px; background: var(--cream-soft);
+    border-radius: 28px; padding: 40px 32px; box-shadow: 0 30px 60px -24px rgba(20,40,47,0.25);
+    text-align: center;
+  }
+  .login-card h1 { font-size: 1.4rem; margin: 0 0 6px; color: var(--navy); }
+  .login-card p { color: var(--ink-soft); margin: 0 0 24px; font-size: 0.92rem; }
+
+  label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+  input[type=text], input[type=password], textarea, select {
+    width: 100%; font-family: inherit; font-size: 0.95rem; color: var(--ink);
+    background: #fff; border: 1px solid rgba(20,40,47,0.15); border-radius: 12px;
+    padding: 11px 14px; outline: none;
+  }
+  input:focus, textarea:focus { border-color: var(--teal); }
+  textarea { resize: vertical; line-height: 1.6; }
+  .field { margin-bottom: 18px; text-align: right; }
+  .error-text { color: #b2452f; font-size: 0.85rem; margin-top: 6px; }
+  .hint { color: var(--ink-faint); font-size: 0.8rem; margin-top: 6px; line-height: 1.6; }
+
+  .card {
+    background: var(--cream-soft); border-radius: 22px; padding: 24px;
+    box-shadow: 0 10px 30px -20px rgba(20,40,47,0.2); margin-bottom: 20px;
+  }
+  .section-title { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin: 0 0 16px; }
+
+  .post-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 14px 0; border-bottom: 1px solid rgba(20,40,47,0.08);
+  }
+  .post-row:last-child { border-bottom: none; }
+  .post-row-title { font-weight: 600; color: var(--navy); margin: 0 0 4px; }
+  .post-row-meta { font-size: 0.8rem; color: var(--ink-faint); display: flex; gap: 10px; align-items: center; }
+  .badge { display: inline-flex; border-radius: 999px; padding: 3px 10px; font-size: 0.72rem; font-weight: 700; }
+  .badge-published { background: var(--teal-mint); color: var(--teal-deep); }
+  .badge-draft { background: #F1E4C9; color: #8a6a1f; }
+  .post-row-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .empty-state { text-align: center; padding: 40px 0; color: var(--ink-faint); }
+
+  .toolbar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .toolbar button {
+    font-family: inherit; font-size: 0.8rem; font-weight: 600; color: var(--navy);
+    background: var(--cream-deep); border: none; border-radius: 8px; padding: 6px 11px; cursor: pointer;
+  }
+  .toolbar button:hover { background: var(--teal-mint); }
+
+  .switch-row { display: flex; align-items: center; gap: 10px; }
+  .switch { position: relative; width: 44px; height: 25px; flex-shrink: 0; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider {
+    position: absolute; inset: 0; background: rgba(20,40,47,0.2); border-radius: 999px;
+    cursor: pointer; transition: background .2s;
+  }
+  .slider::before {
+    content: ""; position: absolute; width: 19px; height: 19px; left: 3px; top: 3px;
+    background: #fff; border-radius: 50%; transition: transform .2s;
+  }
+  .switch input:checked + .slider { background: var(--teal); }
+  .switch input:checked + .slider::before { transform: translateX(-19px); }
+
+  .cover-preview { width: 100%; max-width: 260px; border-radius: 14px; overflow: hidden; margin-top: 10px; }
+  .cover-preview img { display: block; width: 100%; height: auto; }
+
+  .form-actions { display: flex; gap: 10px; justify-content: flex-start; margin-top: 24px; flex-wrap: wrap; }
+  .top-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; gap: 12px; flex-wrap: wrap; }
+
+  .preview-pane {
+    border: 1px dashed rgba(20,40,47,0.2); border-radius: 14px; padding: 16px; margin-top: 8px;
+    line-height: 1.9; max-height: 260px; overflow: auto; background: #fff;
+  }
+  .preview-pane h1, .preview-pane h2, .preview-pane h3 { color: var(--navy); }
+  .preview-pane img { max-width: 100%; border-radius: 10px; }
+  .preview-pane a { color: var(--teal-deep); text-decoration: underline; }
+
+  .toast {
+    position: fixed; bottom: 20px; right: 20px; left: 20px; max-width: 360px; margin-inline-start: auto;
+    background: var(--navy); color: var(--cream-soft); padding: 14px 18px; border-radius: 14px;
+    font-size: 0.9rem; box-shadow: 0 15px 40px -15px rgba(0,0,0,0.5); z-index: 100;
+  }
+  .toast.error { background: #7a2e1e; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+<div id="login-screen" class="login-screen">
+  <form id="login-form" class="login-card">
+    <h1>لوحة تحكم المدونة</h1>
+    <p>سجّل الدخول لإضافة أو تعديل منشورات المدونة</p>
+    <div class="field">
+      <label for="password">كلمة المرور</label>
+      <input type="password" id="password" autocomplete="current-password" required />
+    </div>
+    <div id="login-error" class="error-text" hidden></div>
+    <button class="btn btn-primary" type="submit" style="width:100%; justify-content:center; margin-top:8px;">
+      دخول
+    </button>
+  </form>
+</div>
+
+<div id="app" hidden>
+  <div class="topbar">
+    <h1>لوحة تحكم مدونة فُورْوَرْد</h1>
+    <button class="btn btn-ghost btn-sm" id="logout-btn">تسجيل الخروج</button>
+  </div>
+
+  <div class="wrap">
+    <div id="list-view">
+      <div class="top-actions">
+        <div class="section-title" style="margin:0;">المنشورات</div>
+        <button class="btn btn-primary" id="new-post-btn">+ منشور جديد</button>
+      </div>
+      <div class="card" id="posts-card">
+        <div id="posts-list"></div>
+      </div>
+    </div>
+
+    <div id="edit-view" hidden>
+      <div class="top-actions">
+        <div class="section-title" style="margin:0;" id="editor-heading">منشور جديد</div>
+        <button class="btn btn-light btn-sm" id="back-btn">‹ رجوع للقائمة</button>
+      </div>
+
+      <form id="post-form" class="card">
+        <div class="field">
+          <label for="f-title">العنوان</label>
+          <input type="text" id="f-title" required />
+        </div>
+
+        <div class="field">
+          <label for="f-slug">رابط الصفحة (slug)</label>
+          <input type="text" id="f-slug" dir="ltr" style="text-align:left;" />
+          <div class="hint">يتولّد تلقائيًا من العنوان. استخدم فقط حروف إنجليزية وأرقام وشرطات (-). هذا هو الجزء الذي يظهر في رابط المقال.</div>
+        </div>
+
+        <div class="field">
+          <label for="f-excerpt">مقتطف قصير (يظهر في صفحة المدونة الرئيسية)</label>
+          <textarea id="f-excerpt" rows="2" required></textarea>
+        </div>
+
+        <div class="field">
+          <label for="f-author">اسم الكاتب</label>
+          <input type="text" id="f-author" required />
+        </div>
+
+        <div class="field">
+          <label>صورة الغلاف</label>
+          <input type="file" id="f-cover-file" accept="image/*" />
+          <div class="hint">أو الصق رابط صورة مباشرة (ينتهي عادة بـ ‎.jpg‎ أو ‎.png‎ — وليس كود Markdown كامل مثل ‎![وصف](رابط)‎):</div>
+          <input type="text" id="f-cover-url" dir="ltr" style="text-align:left; margin-top:6px;" placeholder="https://..." />
+          <div id="cover-status" class="hint"></div>
+          <div id="cover-preview" class="cover-preview" hidden><img id="cover-preview-img" alt="" /></div>
+        </div>
+
+        <div class="field">
+          <label for="f-content">محتوى المقال</label>
+          <div class="toolbar">
+            <button type="button" data-md="bold">غامق</button>
+            <button type="button" data-md="italic">مائل</button>
+            <button type="button" data-md="h2">عنوان</button>
+            <button type="button" data-md="link">رابط</button>
+            <button type="button" data-md="image">صورة</button>
+            <button type="button" data-md="ul">قائمة نقطية</button>
+            <button type="button" data-md="ol">قائمة مرقّمة</button>
+            <button type="button" data-md="quote">اقتباس</button>
+          </div>
+          <textarea id="f-content" rows="14" required></textarea>
+          <div class="hint">
+            يدعم صيغة Markdown البسيطة: **غامق**، *مائل*، # عنوان، فقرة فارغة بين السطور لبدء فقرة جديدة،
+            [نص](رابط) لرابط، ![وصف](رابط الصورة) لإدراج صورة، وأسطر تبدأ بـ "- " لقائمة نقطية.
+          </div>
+          <button type="button" class="btn btn-light btn-sm" id="toggle-preview-btn" style="margin-top:10px;">👁 معاينة</button>
+          <div id="preview-pane" class="preview-pane" hidden></div>
+        </div>
+
+        <div class="field switch-row">
+          <label class="switch">
+            <input type="checkbox" id="f-published" />
+            <span class="slider"></span>
+          </label>
+          <label for="f-published" style="margin:0;">نشر المقال (سيظهر فورًا على الموقع)</label>
+        </div>
+
+        <div id="form-error" class="error-text" hidden></div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="save-btn">حفظ</button>
+          <button type="button" class="btn btn-danger" id="delete-btn" hidden>حذف المقال</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---- tiny markdown -> HTML (mirrors lib/markdown.ts on the main site) ----
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function inlineMd(text) {
+    var t = escapeHtml(text);
+    t = t.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, function (_, alt, url) {
+      return '<img src="' + url + '" alt="' + alt + '" loading="lazy" />';
+    });
+    t = t.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (_, label, url) {
+      return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + label + "</a>";
+    });
+    t = t.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    t = t.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>");
+    return t;
+  }
+  function mdToHtml(src) {
+    var normalized = (src || "").replace(/\r\n/g, "\n").trim();
+    if (!normalized) return "";
+    var blocks = normalized.split(/\n{2,}/);
+    return blocks
+      .map(function (block) {
+        var lines = block.split("\n");
+        var heading = lines.length === 1 && lines[0].match(/^(#{1,3})\s+(.*)$/);
+        if (heading) {
+          var level = heading[1].length;
+          return "<h" + level + ">" + inlineMd(heading[2]) + "</h" + level + ">";
+        }
+        if (lines.every(function (l) { return /^>\s?/.test(l); })) {
+          var q = lines.map(function (l) { return l.replace(/^>\s?/, ""); }).join("\n");
+          return "<blockquote>" + inlineMd(q).replace(/\n/g, "<br />") + "</blockquote>";
+        }
+        if (lines.every(function (l) { return /^[-*]\s+/.test(l); })) {
+          return "<ul>" + lines.map(function (l) { return "<li>" + inlineMd(l.replace(/^[-*]\s+/, "")) + "</li>"; }).join("") + "</ul>";
+        }
+        if (lines.every(function (l) { return /^\d+\.\s+/.test(l); })) {
+          return "<ol>" + lines.map(function (l) { return "<li>" + inlineMd(l.replace(/^\d+\.\s+/, "")) + "</li>"; }).join("") + "</ol>";
+        }
+        return "<p>" + lines.map(inlineMd).join("<br />") + "</p>";
+      })
+      .join("\n");
+  }
+
+  function slugify(input) {
+    var map = {"ا":"a","أ":"a","إ":"a","آ":"a","ء":"a","ى":"a","ب":"b","ت":"t","ث":"th","ج":"j","ح":"h","خ":"kh","د":"d","ذ":"dh","ر":"r","ز":"z","س":"s","ش":"sh","ص":"s","ض":"d","ط":"t","ظ":"z","ع":"a","غ":"gh","ف":"f","ق":"q","ك":"k","ل":"l","م":"m","ن":"n","ه":"h","ة":"h","و":"w","ي":"y","ئ":"y"};
+    var out = "";
+    for (var i = 0; i < input.length; i++) out += map[input[i]] || input[i];
+    var slug = out.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
+    return slug;
+  }
+
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { posts: [], editingId: null, slugTouched: false };
+
+  function showToast(msg, isError) {
+    var t = $("toast");
+    t.textContent = msg;
+    t.className = "toast" + (isError ? " error" : "");
+    t.hidden = false;
+    setTimeout(function () { t.hidden = true; }, 3200);
+  }
+
+  function api(path, options) {
+    options = options || {};
+    options.credentials = "same-origin";
+    return fetch(path, options).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (data) {
+        if (!res.ok) throw new Error(data.error || "حدث خطأ غير متوقع.");
+        return data;
+      });
+    });
+  }
+
+  // ---- auth ----
+  function checkSession() {
+    api("/api/admin/session").then(function (data) {
+      if (data.authenticated) showApp(); else showLogin();
+    }).catch(function () { showLogin(); });
+  }
+
+  function showLogin() {
+    $("login-screen").hidden = false;
+    $("app").hidden = true;
+  }
+  function showApp() {
+    $("login-screen").hidden = true;
+    $("app").hidden = false;
+    loadPosts();
+  }
+
+  $("login-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var err = $("login-error");
+    err.hidden = true;
+    api("/api/admin/login", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ password: $("password").value }),
+    }).then(function () {
+      $("password").value = "";
+      showApp();
+    }).catch(function (e) {
+      err.textContent = e.message;
+      err.hidden = false;
+    });
+  });
+
+  $("logout-btn").addEventListener("click", function () {
+    api("/api/admin/logout", { method: "POST" }).finally(showLogin);
+  });
+
+  // ---- list ----
+  function loadPosts() {
+    api("/api/admin/posts").then(function (posts) {
+      state.posts = posts;
+      renderList();
+    }).catch(function (e) { showToast(e.message, true); });
+  }
+
+  function renderList() {
+    var container = $("posts-list");
+    if (!state.posts.length) {
+      container.innerHTML = '<div class="empty-state">لا توجد منشورات بعد. اضغط "منشور جديد" للبدء.</div>';
+      return;
+    }
+    container.innerHTML = "";
+    state.posts.forEach(function (post) {
+      var row = document.createElement("div");
+      row.className = "post-row";
+      row.innerHTML =
+        '<div>' +
+          '<p class="post-row-title">' + escapeHtml(post.title) + '</p>' +
+          '<div class="post-row-meta">' +
+            '<span class="badge ' + (post.published ? "badge-published" : "badge-draft") + '">' + (post.published ? "منشور" : "مسودة") + '</span>' +
+            '<span>' + escapeHtml(post.author) + '</span>' +
+            '<span>' + new Date(post.updatedAt).toLocaleDateString("ar") + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="post-row-actions">' +
+          '<button class="btn btn-light btn-sm" data-edit="' + post.id + '">تعديل</button>' +
+        '</div>';
+      container.appendChild(row);
+    });
+    container.querySelectorAll("[data-edit]").forEach(function (btn) {
+      btn.addEventListener("click", function () { openEditor(Number(btn.getAttribute("data-edit"))); });
+    });
+  }
+
+  $("new-post-btn").addEventListener("click", function () { openEditor(null); });
+  $("back-btn").addEventListener("click", function () { closeEditor(); });
+
+  // ---- editor ----
+  function openEditor(id) {
+    state.editingId = id;
+    state.slugTouched = Boolean(id);
+    $("form-error").hidden = true;
+    $("preview-pane").hidden = true;
+    $("cover-preview").hidden = true;
+    $("f-cover-file").value = "";
+
+    if (id) {
+      var post = state.posts.find(function (p) { return p.id === id; });
+      $("editor-heading").textContent = "تعديل المنشور";
+      $("f-title").value = post.title;
+      $("f-slug").value = post.slug;
+      $("f-excerpt").value = post.excerpt;
+      $("f-author").value = post.author;
+      $("f-content").value = post.content;
+      $("f-cover-url").value = post.coverImage || "";
+      $("f-published").checked = post.published;
+      $("delete-btn").hidden = false;
+      updateCoverPreview(post.coverImage);
+    } else {
+      $("editor-heading").textContent = "منشور جديد";
+      $("post-form").reset();
+      $("delete-btn").hidden = true;
+    }
+
+    $("list-view").hidden = true;
+    $("edit-view").hidden = false;
+  }
+
+  function closeEditor() {
+    $("edit-view").hidden = true;
+    $("list-view").hidden = false;
+    loadPosts();
+  }
+
+  $("f-title").addEventListener("input", function () {
+    if (!state.slugTouched) $("f-slug").value = slugify($("f-title").value);
+  });
+  $("f-slug").addEventListener("input", function () { state.slugTouched = true; });
+
+  function updateCoverPreview(url) {
+    var wrap = $("cover-preview");
+    if (url) {
+      $("cover-preview-img").src = url;
+      wrap.hidden = false;
+    } else {
+      wrap.hidden = true;
+    }
+  }
+  // If someone pastes a whole Markdown image tag (![alt](url)) here instead
+  // of a plain link — an easy mix-up with the content editor's own image
+  // syntax — pull just the URL back out instead of saving the broken value.
+  function extractPlainImageUrl(value) {
+    var match = value.match(/^!\[[^\]]*\]\(([^)\s]+)\)$/);
+    return match ? match[1] : value;
+  }
+  $("f-cover-url").addEventListener("blur", function () {
+    var fixed = extractPlainImageUrl($("f-cover-url").value.trim());
+    if (fixed !== $("f-cover-url").value.trim()) $("f-cover-url").value = fixed;
+    updateCoverPreview(fixed);
+  });
+  $("f-cover-url").addEventListener("input", function () { updateCoverPreview($("f-cover-url").value.trim()); });
+
+  $("f-cover-file").addEventListener("change", function () {
+    var file = $("f-cover-file").files[0];
+    if (!file) return;
+    var status = $("cover-status");
+    status.textContent = "جاري رفع الصورة...";
+    var body = new FormData();
+    body.append("file", file);
+    fetch("/api/admin/upload", { method: "POST", credentials: "same-origin", body: body })
+      .then(function (res) { return res.json().then(function (data) { if (!res.ok) throw new Error(data.error || "فشل رفع الصورة."); return data; }); })
+      .then(function (data) {
+        $("f-cover-url").value = data.url;
+        updateCoverPreview(data.url);
+        status.textContent = "تم رفع الصورة بنجاح.";
+      })
+      .catch(function (e) { status.textContent = e.message; });
+  });
+
+  // ---- markdown toolbar ----
+  function wrapSelection(before, after, placeholder) {
+    var ta = $("f-content");
+    var start = ta.selectionStart, end = ta.selectionEnd;
+    var selected = ta.value.slice(start, end) || placeholder;
+    var next = ta.value.slice(0, start) + before + selected + after + ta.value.slice(end);
+    ta.value = next;
+    ta.focus();
+    var cursor = start + before.length + selected.length + after.length;
+    ta.setSelectionRange(cursor, cursor);
+  }
+  document.querySelectorAll(".toolbar button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var kind = btn.getAttribute("data-md");
+      if (kind === "bold") wrapSelection("**", "**", "نص غامق");
+      if (kind === "italic") wrapSelection("*", "*", "نص مائل");
+      if (kind === "h2") wrapSelection("## ", "", "عنوان فرعي");
+      if (kind === "link") wrapSelection("[", "](https://)", "نص الرابط");
+      if (kind === "image") wrapSelection("![", "](https://)", "وصف الصورة");
+      if (kind === "ul") wrapSelection("- ", "", "عنصر القائمة");
+      if (kind === "ol") wrapSelection("1. ", "", "عنصر القائمة");
+      if (kind === "quote") wrapSelection("> ", "", "نص الاقتباس");
+    });
+  });
+
+  $("toggle-preview-btn").addEventListener("click", function () {
+    var pane = $("preview-pane");
+    pane.hidden = !pane.hidden;
+    if (!pane.hidden) pane.innerHTML = mdToHtml($("f-content").value) || "<p>لا يوجد محتوى بعد.</p>";
+  });
+
+  // ---- save / delete ----
+  $("post-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var payload = {
+      title: $("f-title").value.trim(),
+      slug: $("f-slug").value.trim(),
+      excerpt: $("f-excerpt").value.trim(),
+      author: $("f-author").value.trim(),
+      content: $("f-content").value.trim(),
+      coverImage: $("f-cover-url").value.trim() || null,
+      published: $("f-published").checked,
+    };
+    var saveBtn = $("save-btn");
+    saveBtn.disabled = true;
+    var url = state.editingId ? "/api/admin/posts/" + state.editingId : "/api/admin/posts";
+    var method = state.editingId ? "PUT" : "POST";
+    api(url, { method: method, headers: { "content-type": "application/json" }, body: JSON.stringify(payload) })
+      .then(function () {
+        showToast("تم الحفظ بنجاح.");
+        closeEditor();
+      })
+      .catch(function (e) {
+        var err = $("form-error");
+        err.textContent = e.message;
+        err.hidden = false;
+      })
+      .finally(function () { saveBtn.disabled = false; });
+  });
+
+  $("delete-btn").addEventListener("click", function () {
+    if (!state.editingId) return;
+    if (!confirm("هل أنت متأكد من حذف هذا المنشور؟ لا يمكن التراجع عن هذا الإجراء.")) return;
+    api("/api/admin/posts/" + state.editingId, { method: "DELETE" })
+      .then(function () {
+        showToast("تم حذف المنشور.");
+        closeEditor();
+      })
+      .catch(function (e) { showToast(e.message, true); });
+  });
+
+  checkSession();
+})();
+</script>
+</body>
+</html>
