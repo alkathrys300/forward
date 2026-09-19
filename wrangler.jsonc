@@ -2,6 +2,12 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "forward",
   "compatibility_date": "2026-08-17",
+  // Pinned to the account that owns forwardmy.org so a manual
+  // `wrangler deploy` from a machine with access to more than one
+  // Cloudflare account can't land on the wrong one by accident. The
+  // real deploy path is Cloudflare's own Git integration (push to
+  // main), which isn't affected by this field.
+  "account_id": "adb1b312e1776686e17ad432f5d11b24",
   "assets": {
     "directory": "./out"
   }

@@ -3,6 +3,11 @@
   "name": "forward-blog-cms",
   "main": "src/index.ts",
   "compatibility_date": "2026-08-19",
+  // Pinned to the Cloudflare account that owns forwardmy.org, so a
+  // `wrangler deploy` from a machine with access to multiple accounts
+  // can't accidentally create a duplicate deployment under the wrong
+  // one (which is exactly what happened once during initial setup).
+  "account_id": "adb1b312e1776686e17ad432f5d11b24",
   "assets": {
     "directory": "./public",
     "binding": "ASSETS"
