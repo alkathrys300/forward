@@ -12,7 +12,7 @@
 // "https://forward-blog-cms.your-subdomain.workers.dev". You can also
 // set NEXT_PUBLIC_BLOG_API_URL at build time instead of editing this file.
 export const BLOG_API_BASE =
-  process.env.NEXT_PUBLIC_BLOG_API_URL || "https://forward-blog-cms.forward-edu.workers.dev";
+  process.env.NEXT_PUBLIC_BLOG_API_URL || "https://forward-blog-cms.slmnamn2014.workers.dev";
 
 export type BlogPostSummary = {
   slug: string;
